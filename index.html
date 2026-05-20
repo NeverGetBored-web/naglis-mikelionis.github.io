@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gyvūnų Pasaulis — jūsų ramybės vieta.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#f5f7ff;
+    --text:#242734;
+    --muted:#68707f;
+
+    --glass:rgba(255,255,255,0.18);
+    --glass-strong:rgba(255,255,255,0.28);
+    --border:rgba(255,255,255,0.4);
+
+    --shadow:
+    0 10px 50px rgba(31,38,135,0.08),
+    inset 0 1px 1px rgba(255,255,255,0.5);
+
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#f8fbff;
+    color:var(--text);
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* BACKGROUND */
+
+.noise{
+    position:fixed;
+    inset:0;
+    opacity:0.04;
+    pointer-events:none;
+    background-image:
+    radial-gradient(#000 0.5px, transparent 0.5px);
+    background-size:8px 8px;
+    z-index:-10;
+}
+
+.gradient{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(90px);
+    z-index:-9;
+    opacity:0.7;
+}
+
+.g1{
+    width:500px;
+    height:500px;
+    background:#ffd8e8;
+    top:-180px;
+    left:-120px;
+}
+
+.g2{
+    width:450px;
+    height:450px;
+    background:#d8ecff;
+    top:35%;
+    right:-150px;
+}
+
+.g3{
+    width:420px;
+    height:420px;
+    background:#e9ddff;
+    bottom:-120px;
+    left:30%;
+}
+
+/* NAV */
+
+nav{
+    position:fixed;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:92%;
+    max-width:1320px;
+
+    padding:16px 24px;
+
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,0.35);
+
+    border-radius:30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    z-index:1000;
+
+    box-shadow:var(--shadow);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo-circle{
+    width:44px;
+    height:44px;
+    border-radius:16px;
+
+    background:
+    linear-gradient(135deg,#ffc7da,#bfdfff,#d9c8ff);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.logo h2{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:-0.5px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:10px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#465062;
+
+    padding:12px 18px;
+    border-radius:18px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:0.35s;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(12px);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+
+    padding:140px 7% 80px;
+
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero-left{
+    position:relative;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:12px 18px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,0.3);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.5);
+
+    margin-bottom:28px;
+
+    box-shadow:var(--shadow);
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#85e1a7;
+}
+
+.hero h1{
+    font-size:clamp(58px,8vw,110px);
+    line-height:0.95;
+    letter-spacing:-5px;
+    margin-bottom:28px;
+}
+
+.hero-gradient{
+    background:linear-gradient(135deg,#ff89b3,#8ba9ff,#82d8ba);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:20px;
+    line-height:1.9;
+    color:var(--muted);
+
+    max-width:650px;
+
+    margin-bottom:40px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:18px 28px;
+    border-radius:22px;
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:0.35s;
+
+    border:1px solid rgba(255,255,255,0.45);
+
+    backdrop-filter:blur(18px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#ffd4e4,#dce8ff);
+    color:#2f3340;
+
+    box-shadow:var(--shadow);
+}
+
+.btn-secondary{
+    background:rgba(255,255,255,0.22);
+    color:#465062;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+/* HERO RIGHT */
+
+.hero-right{
+    position:relative;
+    height:760px;
+}
+
+.floating-card{
+    position:absolute;
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,0.22);
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,0.45);
+
+    box-shadow:var(--shadow);
+
+    transition:0.5s;
+}
+
+.floating-card:hover{
+    transform:translateY(-8px) scale(1.02);
+}
+
+.card-large{
+    width:380px;
+    height:500px;
+
+    top:60px;
+    left:50px;
+}
+
+.card-small{
+    width:240px;
+    height:300px;
+
+    right:0;
+}
+
+.card-bottom{
+    width:290px;
+    height:220px;
+
+    bottom:40px;
+    right:70px;
+}
+
+.floating-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.glass-info{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+
+    padding:14px 16px;
+
+    background:rgba(255,255,255,0.22);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    border-radius:20px;
+
+    color:white;
+}
+
+.glass-info h3{
+    font-size:18px;
+    margin-bottom:4px;
+}
+
+/* STATS */
+
+.stats{
+    padding:40px 7% 100px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+.stat{
+    padding:34px;
+
+    border-radius:32px;
+
+    background:rgba(255,255,255,0.24);
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:var(--shadow);
+}
+
+.stat h2{
+    font-size:52px;
+    margin-bottom:10px;
+
+    background:linear-gradient(135deg,#ff8eb5,#8cb3ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.stat p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* SECTION */
+
+.section{
+    padding:110px 7%;
+}
+
+.section-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:40px;
+
+    margin-bottom:50px;
+}
+
+.section-top h2{
+    font-size:70px;
+    line-height:1;
+    letter-spacing:-4px;
+}
+
+.section-top p{
+    max-width:500px;
+    line-height:1.9;
+    color:var(--muted);
+}
+
+/* BENTO */
+
+.bento{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:28px;
+}
+
+.bento-left,
+.bento-right{
+    display:grid;
+    gap:28px;
+}
+
+.bento-card{
+    position:relative;
+
+    min-height:280px;
+
+    border-radius:40px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:var(--shadow);
+}
+
+.bento-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:linear-gradient(to top,rgba(0,0,0,0.45),transparent);
+}
+
+.bento-content{
+    position:absolute;
+    left:28px;
+    bottom:28px;
+    color:white;
+}
+
+.bento-content h3{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.bento-content p{
+    max-width:420px;
+    line-height:1.8;
+}
+
+/* QUOTE */
+
+.quote{
+    margin:120px 7%;
+    padding:70px;
+
+    border-radius:44px;
+
+    background:
+    linear-gradient(135deg,
+    rgba(255,224,235,0.45),
+    rgba(221,237,255,0.35),
+    rgba(239,231,255,0.4));
+
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+}
+
+.quote h2{
+    font-size:56px;
+    line-height:1.2;
+    letter-spacing:-3px;
+
+    margin-bottom:26px;
+}
+
+.quote p{
+    color:var(--muted);
+    font-size:18px;
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+}
+
+.gallery img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+
+    border-radius:30px;
+
+    transition:0.45s;
+
+    box-shadow:0 18px 40px rgba(0,0,0,0.08);
+}
+
+.gallery img:hover{
+    transform:translateY(-8px) rotate(1deg);
+}
+
+/* CONTACT */
+
+.contact{
+    margin:120px 7%;
+
+    padding:70px;
+
+    border-radius:44px;
+
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(30px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:var(--shadow);
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.contact h2{
+    font-size:60px;
+    letter-spacing:-3px;
+    margin-bottom:20px;
+}
+
+.contact p{
+    color:var(--muted);
+    line-height:2;
+}
+
+.contact-links{
+    display:grid;
+    gap:20px;
+}
+
+.contact-item{
+    padding:24px;
+
+    border-radius:26px;
+
+    background:rgba(255,255,255,0.24);
+
+    border:1px solid rgba(255,255,255,0.4);
+}
+
+.contact-item span{
+    display:block;
+    color:#8d95a5;
+    margin-bottom:8px;
+}
+
+.contact-item strong{
+    font-size:18px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:50px;
+    text-align:center;
+    color:#72798a;
+}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .hero-right{
+        height:auto;
+        display:grid;
+        gap:24px;
+    }
+
+    .floating-card{
+        position:relative !important;
+        width:100% !important;
+        height:300px !important;
+        top:auto !important;
+        left:auto !important;
+        right:auto !important;
+        bottom:auto !important;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .bento{
+        grid-template-columns:1fr;
+    }
+
+    .contact{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    nav{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        padding-top:180px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .section-top{
+        flex-direction:column;
+        align-items:start;
+    }
+
+    .section-top h2{
+        font-size:48px;
+    }
+
+    .quote{
+        padding:40px 28px;
+    }
+
+    .quote h2{
+        font-size:38px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .contact{
+        padding:40px 24px;
+    }
+
+    .contact h2{
+        font-size:42px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="noise"></div>
+
+<div class="gradient g1"></div>
+<div class="gradient g2"></div>
+<div class="gradient g3"></div>
+
+<nav>
+
+<div class="logo">
+<div class="logo-circle">🐾</div>
+<h2>Gyvūnų Pasaulis</h2>
+</div>
+
+<ul>
+<li><a href="#animals">Gyvūnai</a></li>
+<li><a href="#gallery">Galerija</a></li>
+<li><a href="#contact">Kontaktai</a></li>
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-left">
+
+<div class="badge">
+<div class="dot"></div>
+<span>Jūsų ramybės vieta</span>
+</div>
+
+<h1>
+Atrask<br>
+<span class="hero-gradient">gyvūnų pasaulio</span><br>
+grožį.
+</h1>
+
+<p>
+Pamatysite gražiausius gyvūnų vaizdus, kokius esat matę.
+</p>
+
+<div class="hero-actions">
+<a href="#gallery" class="btn btn-primary">Peržiūrėti galeriją</a>
+<a href="#animals" class="btn btn-secondary">Tyrinėti daugiau</a>
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<div class="floating-card card-large">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1400&auto=format&fit=crop">
+<div class="glass-info">
+<h3>Mylėkite gyvūnus..</h3>
+<p>Kaip jie myli jus</p>
+</div>
+</div>
+
+<div class="floating-card card-small">
+<img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="floating-card card-bottom">
+<img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<h2>120+</h2>
+<p>Skirtingų gyvūnų rūšių galerijoje.</p>
+</div>
+
+<div class="stat">
+<h2>4K</h2>
+<p>Aukštos kokybės cinematic nuotraukos.</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Įkvėpimas gamtos ir gyvūnų mylėtojams.</p>
+</div>
+
+<div class="stat">
+<h2>∞</h2>
+<p>Meilė gyvūnams ir natūraliam pasauliui.</p>
+</div>
+
+</section>
+
+<section class="section" id="animals">
+
+<div class="section-top">
+<h2>Įspūdingi<br>gyvūnai</h2>
+
+<p>
+Tikros gamtos gerybės..
+</p>
+</div>
+
+<div class="bento">
+
+<div class="bento-left">
+
+<div class="bento-card">
+<img src="https://images.unsplash.com/photo-1607350999170-b893fef057ea?q=80&w=1400&auto=format&fit=crop">
+<div class="overlay"></div>
+
+<div class="bento-content">
+<h3>Vilkai</h3>
+<p>Stiprus ryšys, instinktai ir laukinė elegancija.</p>
+</div>
+
+</div>
+
+<div class="bento-card">
+<img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?q=80&w=1400&auto=format&fit=crop">
+<div class="overlay"></div>
+
+<div class="bento-content">
+<h3>Papūgos</h3>
+<p>Ramybė, gamta ir natūrali harmonija.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="bento-right">
+
+<div class="bento-card">
+<img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1400&auto=format&fit=crop">
+<div class="overlay"></div>
+
+<div class="bento-content">
+<h3>Šunys</h3>
+<p>Ištikimybė ir draugystė.</p>
+</div>
+
+</div>
+
+<div class="bento-card">
+<img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=1400&auto=format&fit=crop">
+<div class="overlay"></div>
+
+<div class="bento-content">
+<h3>Lapės</h3>
+<p>Elegancija ir sumanumas.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="quote">
+
+<h2>
+„Gamta niekada neskuba,<br>
+bet visada sukuria kažką tobulo.“
+</h2>
+
+<p>- Naglis Mikelionis, 2026</p>
+
+</div>
+
+<section class="section" id="gallery">
+
+<div class="section-top">
+<h2>Galerija</h2>
+
+<p>
+Pamatykite dar nuostabiųjų būtybių.
+</p>
+</div>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1444212477490-ca407925329e?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<section class="contact" id="contact">
+
+<div>
+<h2>Kontaktai</h2>
+
+<p>
+Jeigu myli gyvūnus ir gamtą — susisiek.
+</p>
+</div>
+
+<div class="contact-links">
+
+<div class="contact-item">
+<span>El. paštas</span>
+<strong>naglis.mikelionis@jjanonis.lt</strong>
+</div>
+
+<div class="contact-item">
+<span>Instagram</span>
+<strong>@naglismikelionis</strong>
+</div>
+
+<div class="contact-item">
+<span>Lokacija</span>
+<strong>Šiauliai, Lietuva</strong>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Gyvūnų Pasaulis — Naglis Mikelionis
+</footer>
+
+</body>
+</html>
